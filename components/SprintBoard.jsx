@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { sprints } from '../data/sprints';
 
 const PRIORITY_COLOR = { HIGH: '#C0392B', MEDIUM: '#E07B39', LOW: '#2D6A4F' };
-const STATUS_LABEL   = { backlog: 'Backlog', 'in-progress': 'In Progress', testing: 'Testing', done: 'Done ✓' };
-const STATUS_COLOR   = { backlog: 'var(--border)', 'in-progress': 'var(--tan)', testing: '#6B46C1', done: 'var(--success)' };
+const STATUS_LABEL   = { backlog: 'Backlog', 'needs-scoping': 'Needs Scoping', 'in-progress': 'In Progress', testing: 'Testing', done: 'Done ✓' };
+const STATUS_COLOR   = { backlog: 'var(--border)', 'needs-scoping': '#E07B39', 'in-progress': 'var(--tan)', testing: '#6B46C1', done: 'var(--success)' };
 const TYPE_ICON      = { development: '⚙️', design: '🎨', marketing: '📣' };
 
 function TaskCard({ task }) {
@@ -53,10 +53,11 @@ export default function SprintBoard() {
   const sprint = sprints[activeSprint];
 
   const columns = {
-    backlog:     sprint.tasks.filter(t => t.status === 'backlog'),
-    'in-progress': sprint.tasks.filter(t => t.status === 'in-progress'),
-    testing:     sprint.tasks.filter(t => t.status === 'testing'),
-    done:        sprint.tasks.filter(t => t.status === 'done'),
+    backlog:         sprint.tasks.filter(t => t.status === 'backlog'),
+    'needs-scoping': sprint.tasks.filter(t => t.status === 'needs-scoping'),
+    'in-progress':   sprint.tasks.filter(t => t.status === 'in-progress'),
+    testing:         sprint.tasks.filter(t => t.status === 'testing'),
+    done:            sprint.tasks.filter(t => t.status === 'done'),
   };
 
   return (

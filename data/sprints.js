@@ -12,12 +12,13 @@ export const sprints = [
     focus: 'Quick Wins & Highest-Impact Fixes',
     status: 'active',
     tasks: [
-      { id: 't1', title: 'Move ATC button above fold on product pages', priority: 'HIGH', status: 'todo', impact: '+0.15% CVR est.' },
-      { id: 't2', title: 'Add Apple Pay & Google Pay to checkout', priority: 'HIGH', status: 'todo', impact: '+0.12% CVR est.' },
-      { id: 't3', title: 'Fix dead-end empty cart — add product recommendations', priority: 'HIGH', status: 'todo', impact: '+0.08% CVR est.' },
-      { id: 't4', title: 'Add "Join Club" CTA next to Club Member Price display', priority: 'MEDIUM', status: 'todo', impact: '+0.06% CVR est.' },
-      { id: 't5', title: 'Build out 404 page with product suggestions', priority: 'MEDIUM', status: 'todo', impact: '+0.04% CVR est.' },
-      { id: 't6', title: 'Delay "Stay in the Know" slide-in to 30s / exit intent', priority: 'MEDIUM', status: 'todo', impact: '+0.03% CVR est.' },
+      { id: 't1', title: 'Move ATC button above fold on product pages', priority: 'HIGH', status: 'backlog', impact: '+0.15% CVR est.' },
+      { id: 't2a', title: 'Add Apple Pay to checkout', priority: 'HIGH', status: 'backlog', impact: '+0.08% CVR est.' },
+      { id: 't2b', title: 'Scope Google Pay re-implementation (prior error/refund issues on BC)', priority: 'MEDIUM', status: 'needs-scoping', impact: '+0.06% CVR est.' },
+      { id: 't3', title: 'Fix dead-end empty cart — add product recommendations', priority: 'HIGH', status: 'backlog', impact: '+0.08% CVR est.' },
+      { id: 't4', title: 'Add "Join Club" CTA next to Club Member Price display', priority: 'MEDIUM', status: 'backlog', impact: '+0.06% CVR est.' },
+      { id: 't5', title: 'Build out 404 page with product suggestions', priority: 'MEDIUM', status: 'backlog', impact: '+0.04% CVR est.' },
+      { id: 't6', title: 'Delay "Stay in the Know" slide-in to 30s / exit intent', priority: 'MEDIUM', status: 'backlog', impact: '+0.03% CVR est.' },
     ]
   },
   {
@@ -27,11 +28,11 @@ export const sprints = [
     focus: 'A/B Testing & Social Proof',
     status: 'upcoming',
     tasks: [
-      { id: 't7', title: 'A/B Test: Product-first hero vs. current lifestyle hero', priority: 'HIGH', status: 'todo', impact: '+0.18% CVR est.' },
-      { id: 't8', title: 'A/B Test: Sticky ATC bar on scroll vs. current', priority: 'HIGH', status: 'todo', impact: '+0.10% CVR est.' },
-      { id: 't9', title: 'Add trust badges (lifetime warranty, free returns) near ATC', priority: 'MEDIUM', status: 'todo', impact: '+0.07% CVR est.' },
-      { id: 't10', title: 'Display review count & stars on product cards in collections', priority: 'MEDIUM', status: 'todo', impact: '+0.05% CVR est.' },
-      { id: 't11', title: 'Add urgency messaging on low-stock products', priority: 'LOW', status: 'todo', impact: '+0.04% CVR est.' },
+      { id: 't7', title: 'A/B Test: Product-first hero vs. current lifestyle hero', priority: 'HIGH', status: 'backlog', impact: '+0.18% CVR est.' },
+      { id: 't8', title: 'A/B Test: Sticky ATC bar on scroll vs. current', priority: 'HIGH', status: 'backlog', impact: '+0.10% CVR est.' },
+      { id: 't9', title: 'Add trust badges (lifetime warranty, free returns) near ATC', priority: 'MEDIUM', status: 'backlog', impact: '+0.07% CVR est.' },
+      { id: 't10', title: 'Display review count & stars on product cards in collections', priority: 'MEDIUM', status: 'backlog', impact: '+0.05% CVR est.' },
+      { id: 't11', title: 'Add urgency messaging on low-stock products', priority: 'LOW', status: 'backlog', impact: '+0.04% CVR est.' },
     ]
   },
   {
@@ -41,11 +42,11 @@ export const sprints = [
     focus: 'Checkout Optimization & Retention',
     status: 'upcoming',
     tasks: [
-      { id: 't12', title: 'Optimize checkout flow — reduce steps & form fields', priority: 'HIGH', status: 'todo', impact: '+0.20% CVR est.' },
-      { id: 't13', title: 'Add post-purchase upsell (leather care kit)', priority: 'MEDIUM', status: 'todo', impact: '+$12 AOV est.' },
-      { id: 't14', title: 'Implement cart abandonment email sequence (3-step)', priority: 'HIGH', status: 'todo', impact: '+0.08% CVR est.' },
-      { id: 't15', title: 'A/B Test: Free shipping threshold messaging in cart', priority: 'MEDIUM', status: 'todo', impact: '+0.06% CVR est.' },
-      { id: 't16', title: 'Add "Recently Viewed" section on product pages', priority: 'LOW', status: 'todo', impact: '+0.03% CVR est.' },
+      { id: 't12', title: 'Optimize checkout flow — reduce steps & form fields', priority: 'HIGH', status: 'backlog', impact: '+0.20% CVR est.' },
+      { id: 't13', title: 'Add post-purchase upsell (leather care kit)', priority: 'MEDIUM', status: 'backlog', impact: '+$12 AOV est.' },
+      { id: 't14', title: 'Implement cart abandonment email sequence (3-step)', priority: 'HIGH', status: 'backlog', impact: '+0.08% CVR est.' },
+      { id: 't15', title: 'A/B Test: Free shipping threshold messaging in cart', priority: 'MEDIUM', status: 'backlog', impact: '+0.06% CVR est.' },
+      { id: 't16', title: 'Add "Recently Viewed" section on product pages', priority: 'LOW', status: 'backlog', impact: '+0.03% CVR est.' },
     ]
   }
 ];
