@@ -142,6 +142,8 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
   const [taskData, setTaskData] = useState(sprints);
   const [liveData, setLiveData] = useState(null);
+  const [convertData, setConvertData] = useState(null);
+  const [convertLoading, setConvertLoading] = useState(false);
 
   useEffect(() => {
     // Check auth via sessionStorage
@@ -152,6 +154,9 @@ export default function Dashboard() {
     }
     // Try to fetch live GA4 data
     fetch('/api/analytics').then(r => r.ok ? r.json() : null).then(d => { if (d) setLiveData(d); }).catch(() => {});
+    // Fetch Convert.com experiment data
+    setConvertLoading(true);
+    fetch('/api/convert').then(r => r.ok ? r.json() : null).then(d => { if (d) setConvertData(d); }).catch(() => {}).finally(() => setConvertLoading(false));
   }, []);
 
   const updateTask = (sprintId, taskId) => {
@@ -327,6 +332,58 @@ export default function Dashboard() {
           {/* A/B TESTS TAB */}
           {activeTab === 'abtests' && (
             <div>
+              {/* Live Convert.com experiments */}
+              <div style={{ marginBottom: '24px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                  <p style={{ color: CREAM, fontSize: '16px', fontWeight: 700, margin: 0, fontFamily: "'Playfair Display', serif" }}>Live Experiments</p>
+                  <span style={{ background: 'rgba(100,180,255,0.15)', color: '#64b4ff', padding: '3px 10px', borderRadius: '20px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Convert.com</span>
+                  {convertLoading && <span style={{ color: CREAM_DIM, fontSize: '12px' }}>Loading…</span>}
+                </div>
+                {!convertLoading && convertData?.experiments?.length === 0 && (
+                  <div style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: '14px', padding: '32px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '28px', margin: '0 0 8px' }}>🧪</p>
+                    <p style={{ color: CREAM, fontSize: '15px', fontWeight: 600, margin: '0 0 6px' }}>No experiments running yet</p>
+                    <p style={{ color: CREAM_DIM, fontSize: '13px', margin: 0 }}>Once you launch your first A/B test in Convert.com, it'll appear here with live results.</p>
+                  </div>
+                )}
+                {convertData?.experiments?.map(exp => {
+                  const statusColor = {
+                    active: { bg: 'rgba(100,220,130,0.15)', text: '#64dc82', label: '● Active' },
+                    paused: { bg: 'rgba(201,169,110,0.15)', text: GOLD, label: '⏸ Paused' },
+                    completed: { bg: 'rgba(100,180,255,0.15)', text: '#64b4ff', label: '✓ Complete' },
+                    draft: { bg: 'rgba(255,255,255,0.08)', text: CREAM_DIM, label: '○ Draft' },
+                  }[exp.status] || { bg: 'rgba(255,255,255,0.08)', text: CREAM_DIM, label: exp.status };
+                  return (
+                    <div key={exp.id} style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: '14px', padding: '20px', marginBottom: '12px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                        <h3 style={{ color: CREAM, fontSize: '15px', fontWeight: 700, margin: 0 }}>{exp.name}</h3>
+                        <span style={{ background: statusColor.bg, color: statusColor.text, padding: '3px 10px', borderRadius: '20px', fontSize: '11px', fontWeight: 600 }}>{statusColor.label}</span>
+                      </div>
+                      {exp.report ? (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '10px', marginTop: '12px' }}>
+                          {exp.report.variations?.map(v => (
+                            <div key={v.id} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '12px' }}>
+                              <p style={{ color: CREAM_DIM, fontSize: '11px', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{v.name}</p>
+                              <p style={{ color: GOLD, fontSize: '20px', fontWeight: 700, margin: '0 0 2px', fontFamily: "'Playfair Display', serif" }}>
+                                {v.conversion_rate != null ? `${(v.conversion_rate * 100).toFixed(2)}%` : '—'}
+                              </p>
+                              <p style={{ color: CREAM_DIM, fontSize: '11px', margin: 0 }}>{v.visitors?.toLocaleString() ?? '—'} visitors</p>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p style={{ color: CREAM_DIM, fontSize: '13px', margin: '8px 0 0' }}>No report data yet — test needs visitors to generate results.</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Divider */}
+              <div style={{ borderTop: `1px solid ${BORDER}`, marginBottom: '24px', paddingTop: '24px' }}>
+                <p style={{ color: CREAM, fontSize: '16px', fontWeight: 700, margin: '0 0 14px', fontFamily: "'Playfair Display', serif" }}>Planned Tests</p>
+              </div>
+
               {abTests.map(test => (
                 <div key={test.id} style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: '14px', padding: '24px', marginBottom: '16px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
