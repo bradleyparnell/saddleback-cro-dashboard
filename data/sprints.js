@@ -93,6 +93,71 @@ export const abTests = [
   }
 ];
 
+// SBL Team's prior & ongoing work — logged for coordination / test contamination awareness
+export const sblActivity = [
+  {
+    category: 'UI/UX & Website Experience',
+    emoji: '🎨',
+    status: 'completed',
+    items: [
+      {
+        title: 'Navigation Bar Updates',
+        status: 'completed',
+        notes: 'A/B tested and heatmap analysis confirmed the "Shop All" navigation outperformed the previous structure. Now implemented as the live site navigation.',
+      },
+      {
+        title: 'Wallet Page Improvements',
+        status: 'completed',
+        notes: 'Added tabs to the Wallet page so users can browse specific wallet categories (including Classic Wallet designs) more easily.',
+      },
+      {
+        title: 'Discover Tab',
+        status: 'completed',
+        notes: 'Heatmap analysis confirmed users are actively engaging with the Discover tab while still accessing Saddleback and featured links. No changes needed.',
+      },
+    ],
+  },
+  {
+    category: 'SEO',
+    emoji: '🔍',
+    status: 'ongoing',
+    items: [
+      {
+        title: 'Collection & Product Page Optimization',
+        status: 'ongoing',
+        notes: 'Aligning pages with customer search intent to improve discoverability, navigation clarity, and purchase decision support.',
+      },
+      {
+        title: 'Keyword Expansion & Keyword Mapping',
+        status: 'ongoing',
+        notes: 'Identifying high-intent search terms and mapping them to the most relevant pages to attract users closer to purchase.',
+      },
+      {
+        title: 'Metadata Optimization',
+        status: 'ongoing',
+        notes: 'Improving title tags and meta descriptions across key pages to increase organic click-through rates.',
+      },
+      {
+        title: 'Ongoing Content Production',
+        status: 'ongoing',
+        notes: 'Continuous creation and optimization of content addressing customer questions, product use cases, and search intent.',
+      },
+    ],
+  },
+  {
+    category: 'Paid Media',
+    emoji: '📣',
+    status: 'ongoing',
+    items: [
+      {
+        title: 'Retargeting — Meta & Google',
+        status: 'ongoing',
+        notes: 'Retargeting users who added to cart or initiated checkout but did not complete purchase. Campaigns target high-intent visitors to drive return conversions.',
+      },
+    ],
+  },
+];
+
 // Monthly CVR data — will be replaced by live GA4 data once connected
 // Format: { month: 'MMM YY', cvr: number, sessions: number }
 export const cvrHistory = [

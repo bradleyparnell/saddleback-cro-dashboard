@@ -4,7 +4,7 @@ import Head from 'next/head';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart
 } from 'recharts';
-import { sprints, abTests, cvrHistory, BASELINE_CVR, TARGET_CVR, AOV, MONTHLY_SESSIONS, PROJECT_START } from '../data/sprints';
+import { sprints, abTests, cvrHistory, sblActivity, BASELINE_CVR, TARGET_CVR, AOV, MONTHLY_SESSIONS, PROJECT_START } from '../data/sprints';
 
 const BROWN = '#2c1810';
 const GOLD = '#c9a96e';
@@ -326,6 +326,47 @@ export default function Dashboard() {
               {taskData.map(sprint => (
                 <SprintSection key={sprint.id} sprint={sprint} updateTask={updateTask} />
               ))}
+
+              {/* SBL Team Activity */}
+              <div style={{ marginTop: '32px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+                  <p style={{ color: CREAM, fontSize: '16px', fontWeight: 700, margin: 0, fontFamily: "'Playfair Display', serif" }}>SBL Team Activity</p>
+                  <span style={{ background: 'rgba(201,169,110,0.12)', color: GOLD, padding: '3px 10px', borderRadius: '20px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' }}>For Reference</span>
+                </div>
+                <p style={{ color: CREAM_DIM, fontSize: '13px', margin: '0 0 16px', lineHeight: 1.6 }}>
+                  Prior work and ongoing initiatives from the Saddleback team. Logged here for sprint coordination and to avoid A/B test contamination.
+                </p>
+                {sblActivity.map(group => (
+                  <div key={group.category} style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: '14px', padding: '20px', marginBottom: '14px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+                      <span style={{ fontSize: '16px' }}>{group.emoji}</span>
+                      <p style={{ color: CREAM, fontSize: '14px', fontWeight: 700, margin: 0 }}>{group.category}</p>
+                      <span style={{
+                        background: group.status === 'completed' ? 'rgba(100,220,130,0.15)' : 'rgba(100,180,255,0.15)',
+                        color: group.status === 'completed' ? '#64dc82' : '#64b4ff',
+                        padding: '2px 8px', borderRadius: '20px', fontSize: '10px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px',
+                      }}>{group.status === 'completed' ? '✓ Done' : '● Ongoing'}</span>
+                    </div>
+                    {group.items.map(item => (
+                      <div key={item.title} style={{ display: 'flex', gap: '12px', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{
+                          width: '18px', height: '18px', borderRadius: '5px', flexShrink: 0, marginTop: '1px',
+                          background: item.status === 'completed' ? 'rgba(100,220,130,0.2)' : 'rgba(100,180,255,0.15)',
+                          border: `1px solid ${item.status === 'completed' ? 'rgba(100,220,130,0.4)' : 'rgba(100,180,255,0.3)'}`,
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px',
+                          color: item.status === 'completed' ? '#64dc82' : '#64b4ff',
+                        }}>
+                          {item.status === 'completed' ? '✓' : '●'}
+                        </div>
+                        <div>
+                          <p style={{ color: CREAM, fontSize: '13px', fontWeight: 600, margin: '0 0 3px' }}>{item.title}</p>
+                          <p style={{ color: CREAM_DIM, fontSize: '12px', margin: 0, lineHeight: 1.5 }}>{item.notes}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
