@@ -12,7 +12,7 @@ export const sprints = [
     focus: 'Quick Wins & Highest-Impact Fixes',
     status: 'active',
     tasks: [
-      { id: 't1', title: 'Move ATC button above fold on product pages', priority: 'HIGH', status: 'backlog', impact: '+0.15% CVR est.' },
+      { id: 't1', title: 'A/B Test: Remove PDP hero banner so product info & ATC appear above fold', priority: 'HIGH', status: 'in-progress', impact: '+0.15% CVR est.' },
       { id: 't2a', title: 'Add Apple Pay to checkout', priority: 'HIGH', status: 'backlog', impact: '+0.08% CVR est.' },
       { id: 't2b', title: 'Scope Google Pay re-implementation (prior error/refund issues on BC)', priority: 'MEDIUM', status: 'needs-scoping', impact: '+0.06% CVR est.' },
       { id: 't3', title: 'Fix dead-end empty cart — add product recommendations', priority: 'HIGH', status: 'backlog', impact: '+0.08% CVR est.' },
@@ -52,6 +52,20 @@ export const sprints = [
 ];
 
 export const abTests = [
+  {
+    id: 'ab0',
+    name: 'PDP Hero Banner: Hidden vs. Current',
+    hypothesis: 'Removing the full-bleed lifestyle hero banner on product pages puts the product image, price, and ATC button above the fold immediately — reducing scroll friction and increasing add-to-cart rate',
+    status: 'building',
+    sprint: 1,
+    startDate: null,
+    endDate: null,
+    control: { name: 'Current: full-bleed lifestyle hero above product details', cvr: null },
+    variant: { name: 'Variant: hero banner hidden via CSS, product info loads above fold', cvr: null },
+    winner: null,
+    confidence: null,
+    implementationNotes: 'Use Convert.com visual editor to inject CSS: hide .heroCarousel or equivalent hero container on /product/* URLs. No BC theme changes needed. Target: product detail pages only.',
+  },
   {
     id: 'ab1',
     name: 'Product-First Hero Layout',
